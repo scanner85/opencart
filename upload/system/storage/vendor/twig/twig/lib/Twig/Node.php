@@ -38,9 +38,16 @@ class Twig_Node implements Countable, IteratorAggregate
     public function __construct(array $nodes = [], array $attributes = [], $lineno = 0, $tag = null)
     {
         foreach ($nodes as $name => $node) {
-            if (!$node instanceof self) {
+            /*
+			if (!$node instanceof self) {
                 throw new InvalidArgumentException(sprintf('Using "%s" for the value of node "%s" of "%s" is not supported. You must pass a Twig_Node instance.', is_object($node) ? get_class($node) : null === $node ? 'null' : gettype($node), $name, get_class($this)));
             }
+			*/
+			
+			if (!$node instanceof \Twig_NodeInterface) {
+				@trigger_error(sprintf('Using "%s" for the value of node "%s" of "%s" is deprecated since version 1.25 and will be removed in 2.0.', \is_object($node) ? \get_class($node) : (null === $node ? 'null' : \gettype($node)), $name, \get_class($this)), E_USER_DEPRECATED);
+			}
+			
         }
         $this->nodes = $nodes;
         $this->attributes = $attributes;
