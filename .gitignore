@@ -2,7 +2,7 @@
 /upload/.htaccess
 /upload/config.php
 /upload/admin/config.php
-
+/sqls
 /storage/cache
 
 # Image File
